@@ -116,7 +116,7 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
   \**********************/
 (__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _helloworld_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helloworld.js */ \"./src/helloworld.js\");\n\n\n\nfunction component() {\n  const element = document.createElement(\"div\");\n\n  // Lodash, now imported by this script\n  element.innerHTML = \"Here's a dynamic element\";\n\n  return element;\n}\n\ndocument.body.appendChild(component());\n(0,_helloworld_js__WEBPACK_IMPORTED_MODULE_1__.printHelloWorld)();\n\n\n//# sourceURL=webpack://webpack-template/./src/index.js?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _helloworld_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helloworld.js */ \"./src/helloworld.js\");\n\n\n\nfunction component() {\n  const element = document.createElement(\"div\");\n  element.innerHTML = \"Here's a dynamic element\";\n  return element;\n}\n\ndocument.body.appendChild(component());\n(0,_helloworld_js__WEBPACK_IMPORTED_MODULE_1__.printHelloWorld)();\n\n\n//# sourceURL=webpack://webpack-template/./src/index.js?\n}");
 
 /***/ },
 

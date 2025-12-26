@@ -4,80 +4,113 @@ Abbreviated from [Webpack Docs: Getting Started](https://webpack.js.org/guides/g
 
 1. In your project repo, initalize npm and install webpack and webpack-cli
 
-    >$ npm init -y  
-    >
-    >$ npm install webpack webpack-cli --save-dev 
+   > $ npm init -y
+   >
+   > $ npm install webpack webpack-cli --save-dev
 
 2. Create folder "dist" containing file "index.html" and folder "src" containing file "index.js"
 
-    >$ mkdir dist && touch dist/index.html  
-    >
-    >$ mkdir src && touch src/index.js
+   > $ mkdir dist && touch dist/index.html
+   >
+   > $ mkdir src && touch src/index.js
 
-In package.json, remove "main": "index.js" and add "private": true
+3. In package.json, remove "main": "index.js" and add "private": true
 
-Install dependencies: npm install --save <library>
+   > **"private": true,**  
+   > ~~"main": "index.js"~~
 
-In HTML body <script src="main.js"></script>
+4. Install dependencies:
 
-In package.json, keep "type": "module" if using config file
-OR
-In package.json, change to "type": "module"
+   > $ npm install --save library-name
 
-To generate dist/main.js: npx webpack
+5. Add the script tag to index.html. Doc "main.js" will be generated shortly.
 
-touch webpack.config.js, fill with:
+        <body>
+          <script src="main.js"></script>
+        </body>
 
-    import path from "path";
-    import { fileURLToPath } from "url";
+6. In package.json, change to "type": "module", OR keep "type": "module" if using a config file.
 
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
+        "author": "",
+        "license": "ISC",
+        "type": "module",
 
-    export default {
-      entry: "./src/index.js",
-      output: {
-        filename: "main.js",
-        path: path.resolve(__dirname, "dist"),
-      },
-      mode: 'development' OR 'production' OR 'none'
-    };
+7. Generate dist/main.js:
 
----
+    >$ npx webpack
 
-in package.json, add to "scripts":
-{
-"test": "echo \"Error: no test specified\" && exit 1",
-"build": "webpack"
-},
+8. Generate and populate webpack.config.js.
 
-(Enables npm run build)
+    >touch webpack.config.js
 
-Add .gitignore with node_modules before committing!
+        import path from "path";
+        import { fileURLToPath } from "url";
+
+        const __filename = fileURLToPath(import.meta.url);
+        const __dirname = path.dirname(__filename);
+
+        export default {
+          entry: "./src/index.js",
+          output: {
+            filename: "main.js",
+            path: path.resolve(__dirname, "dist"),
+          },
+          mode: 'development' OR 'production' OR 'none'
+        };
+
+
+9. In package.json, enable the script "npm run build".
+
+        "scripts":
+        {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "webpack"
+        },
+
+10. Add .gitignore with node_modules before committing!
 
 ## Asset Management
 
-npm install --save-dev style-loader css-loader
+1. Install dependencies.
+    >npm install --save-dev style-loader css-loader
 
-Add to webpack.config.js exports:
+2. Update the webpack.config.js exports.
 
-          module: {
-              rules: [
-                {
-                  test: /\.css$/i,
-                  use: ['style-loader', 'css-loader'],
-                },
-                {
-                  test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                  type: 'asset/resource',
-                },
-                {
-                  test: /\.(woff|woff2|eot|ttf|otf)$/i,
-                  type: 'asset/resource',
-                },
-              ],
-            },
+        module: {
+            rules: [
+              {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+              },
+              {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+              },
+              {
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                type: 'asset/resource',
+              },
+            ],
+          },
 
-add .css , imgs, and .woff files to src folder
-In index.html, add: import style and img files
-Add @font-face {} to .css
+3. Add .css files, imgs, and .woff files to src/ folder.
+
+4. Import style sheets and img files to index.js.
+
+        import './style.css';
+
+5. Add the font-face declaration to your .css file.
+
+        @font-face {
+          font-family: 'MyFont';
+          src: url('./my-font.woff2') format('woff2'),
+            url('./my-font.woff') format('woff');
+          font-weight: 600;
+          font-style: normal;
+        }
+
+        .hello {
+          color: red;
+          font-family: 'MyFont';
+          background: url('./icon.png');
+        }
