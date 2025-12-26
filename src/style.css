@@ -1,3 +1,12 @@
-html, body {
-    background-color: #dedede;
+html,
+body {
+  background-color: #dedede;
+}
+
+#sampleButton {
+  background-color: rgb(205, 205, 255);
+}
+
+.red {
+  color: rgb(255, 128, 128);
 }
