@@ -1,5 +1,5 @@
-import './style.css';
-import { printHelloWorld } from "./helloworld.js";
+import "./style.css";
+import { functionName } from "./xFuncModTemplate.js";
 
 function component() {
   const element = document.createElement("div");
@@ -8,4 +8,5 @@ function component() {
 }
 
 document.body.appendChild(component());
-printHelloWorld();
+
+functionName();
