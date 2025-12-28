@@ -1,6 +1,7 @@
 import "./style.css";
 import { functionName } from "./xFuncModTemplate.js";
 import { sampleButton } from "./sampleButton.js";
+import { fixableError } from "./fixableError.js";
 
 function component() {
   const element = document.createElement("div");
@@ -12,3 +13,4 @@ document.body.appendChild(component());
 
 functionName();
 sampleButton();
+fixableError();

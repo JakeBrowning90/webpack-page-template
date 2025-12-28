@@ -6,6 +6,7 @@ const __dirname = path.dirname(__filename);
 
 export default {
   entry: "./src/index.js",
+  devtool: "inline-source-map",
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),

@@ -2,46 +2,46 @@
 
 Abbreviated from [Webpack Docs: Getting Started](https://webpack.js.org/guides/getting-started/)
 
-1. In your project repo, initalize npm and install webpack and webpack-cli
+1.  In your project repo, initalize npm and install webpack and webpack-cli
 
-   > $ npm init -y
-   >
-   > $ npm install webpack webpack-cli --save-dev
+    > $ npm init -y
+    >
+    > $ npm install webpack webpack-cli --save-dev
 
-2. Create folder "dist" containing file "index.html" and folder "src" containing file "index.js"
+2.  Create a .gitignore, folder "dist" containing file "index.html" and folder "src" containing file "index.js"
 
-   > $ mkdir dist && touch dist/index.html
-   >
-   > $ mkdir src && touch src/index.js
+    > $ mkdir dist && touch dist/index.html
+    >
+    > $ mkdir src && touch src/index.js
 
-3. In package.json, remove "main": "index.js" and add "private": true
+3.  In package.json, remove "main": "index.js" and add "private": true
 
-   > **"private": true,**  
-   > ~~"main": "index.js"~~
+    > **"private": true,**  
+    > ~~"main": "index.js"~~
 
-4. Install dependencies:
+4.  Install dependencies:
 
-   > $ npm install --save library-name
+    > $ npm install --save library-name
 
-5. Add the script tag to index.html. Doc "main.js" will be generated shortly.
+5.  Add the script tag to index.html. Doc "main.js" will be generated shortly.
 
         <body>
           <script src="main.js"></script>
         </body>
 
-6. In package.json, change to "type": "module", OR keep "type": "module" if using a config file.
+6.  In package.json, change to "type": "module", OR keep "type": "module" if using a config file.
 
         "author": "",
         "license": "ISC",
         "type": "module",
 
-7. Generate dist/main.js:
+7.  Generate dist/main.js:
 
-    >$ npx webpack
+    > $ npx webpack
 
-8. Generate and populate webpack.config.js.
+8.  Generate and populate webpack.config.js.
 
-    >touch webpack.config.js
+    > touch webpack.config.js
 
         import path from "path";
         import { fileURLToPath } from "url";
@@ -58,8 +58,7 @@ Abbreviated from [Webpack Docs: Getting Started](https://webpack.js.org/guides/g
           mode: 'development' OR 'production' OR 'none'
         };
 
-
-9. In package.json, enable the script "npm run build".
+9.  In package.json, enable the script "npm run build".
 
         "scripts":
         {
@@ -67,14 +66,15 @@ Abbreviated from [Webpack Docs: Getting Started](https://webpack.js.org/guides/g
         "build": "webpack"
         },
 
-10. Add .gitignore with node_modules before committing!
+10. Remember to add node_modules to .gitignore before committing!
 
 ## Asset Management
 
-1. Install dependencies.
-    >npm install --save-dev style-loader css-loader
+1.  Install dependencies.
 
-2. Update the webpack.config.js exports.
+    > npm install --save-dev style-loader css-loader
+
+2.  Update the webpack.config.js exports.
 
         module: {
             rules: [
@@ -93,13 +93,13 @@ Abbreviated from [Webpack Docs: Getting Started](https://webpack.js.org/guides/g
             ],
           },
 
-3. Add .css files, imgs, and .woff files to src/ folder.
+3.  Add .css files, imgs, and .woff files to src/ folder.
 
-4. Import style sheets and img files to index.js.
+4.  Import style sheets and img files to index.js.
 
         import './style.css';
 
-5. Add the font-face declaration to your .css file.
+5.  Add the font-face declaration to your .css file.
 
         @font-face {
           font-family: 'MyFont';
@@ -114,3 +114,18 @@ Abbreviated from [Webpack Docs: Getting Started](https://webpack.js.org/guides/g
           font-family: 'MyFont';
           background: url('./icon.png');
         }
+
+## Development Tools
+
+1.  In webpack.config.js, set mode to 'development'.
+
+2.  Configure a source map to track errors to their origin file and line number, instead of the compliled file. In webpack.config.js, add:
+
+        devtool: 'inline-source-map',
+
+3. Enable the "watch" script to automatically recompile as files are updated. In package.json, add to "scripts":
+
+        "watch": "webpack --watch",  
+
+    Run the script with:  
+      > $ npm run watch
