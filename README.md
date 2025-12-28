@@ -50,12 +50,14 @@ Abbreviated from [Webpack Docs: Getting Started](https://webpack.js.org/guides/g
         const __dirname = path.dirname(__filename);
 
         export default {
+          mode: 'development',
           entry: "./src/index.js",
           output: {
             filename: "main.js",
             path: path.resolve(__dirname, "dist"),
+            clean: "true",
           },
-          mode: 'development' OR 'production' OR 'none'
+
         };
 
 9.  In package.json, enable the script "npm run build".
@@ -123,9 +125,10 @@ Abbreviated from [Webpack Docs: Getting Started](https://webpack.js.org/guides/g
 
         devtool: 'inline-source-map',
 
-3. Enable the "watch" script to automatically recompile as files are updated. In package.json, add to "scripts":
+3.  Enable the "watch" script to automatically recompile as files are updated. In package.json, add to "scripts":
 
-        "watch": "webpack --watch",  
+        "watch": "webpack --watch",
 
-    Run the script with:  
-      > $ npm run watch
+    Run the script with:
+
+    > $ npm run watch
