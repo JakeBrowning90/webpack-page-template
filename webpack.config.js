@@ -5,6 +5,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default {
+  mode: "development",
   entry: "./src/index.js",
   devtool: "inline-source-map",
   output: {
@@ -20,5 +21,4 @@ export default {
       },
     ],
   },
-  mode: "development",
 };
