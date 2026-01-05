@@ -1,4 +1,4 @@
-# Webpack Quickstart
+# Webpack Start - From Scratch
 
 Abbreviated from [Webpack Docs: Getting Started](https://webpack.js.org/guides/getting-started/)
 
@@ -6,69 +6,70 @@ Abbreviated from [Webpack Docs: Getting Started](https://webpack.js.org/guides/g
 
     > $ npm init -y
     >
-    > $ npm install webpack webpack-cli --save-dev
+    > $ npm install --save-dev webpack webpack-cli
 
-2.  Create a .gitignore, folder "dist" containing file "index.html" and folder "src" containing file "index.js"
+    Other useful packages to install now or later (See below):
 
-    > $ mkdir dist && touch dist/index.html
-    >
-    > $ mkdir src && touch src/index.js
+    - **html-webpack-plugin** for HTML handling (assumed for this guide)
+    - **webpack-dev-server** for automatic refreshes (assumed for this guide)
+    - **style-loader** & **css-loader** for CSS handling
+    - **html-loader** if referencing image files in the HTML
+    - **webpack-merge** for splitting config file
 
-3.  In package.json, remove "main": "index.js" and add "private": true
+2.  Remove the "type" property from package.json.
 
-    > **"private": true,**  
-    > ~~"main": "index.js"~~
+3.  Create folder "src" containing files "index.js" amd "template.html. Touch .gitignore and add node_modules and dist.
 
-4.  Install dependencies:
+    > $ mkdir src && touch src/index.js src/template.html
+
+4.  Populate template.html with boilerplate, do not use a script tag.
+
+5.  Install dependencies:
 
     > $ npm install --save library-name
 
-5.  Add the script tag to index.html. Doc "main.js" will be generated shortly.
+6.  Touch and populate webpack.config.js.
 
-        <body>
-          <script src="main.js"></script>
-        </body>
+        const path = require("path");
+        const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-6.  In package.json, change to "type": "module", OR keep "type": "module" if using a config file.
-
-        "author": "",
-        "license": "ISC",
-        "type": "module",
-
-7.  Generate dist/main.js:
-
-    > $ npx webpack
-
-8.  Generate and populate webpack.config.js.
-
-    > touch webpack.config.js
-
-        import path from "path";
-        import { fileURLToPath } from "url";
-
-        const __filename = fileURLToPath(import.meta.url);
-        const __dirname = path.dirname(__filename);
-
-        export default {
-          mode: 'development',
+        module.exports = {
+          mode: "development",
           entry: "./src/index.js",
           output: {
             filename: "main.js",
             path: path.resolve(__dirname, "dist"),
-            clean: "true",
+            clean: true,
           },
-
+          // To track errors to correct file and line
+          devtool: "eval-source-map",
+          // To automatically refresh after changes
+          devServer: {
+            watchFiles: ["./src/template.html"],
+          },
+          plugins: [
+            new HtmlWebpackPlugin({
+              template: "./src/template.html",
+            }),
+          ],
         };
 
-9.  In package.json, enable the script "npm run build".
+7.  In package.json, create the scripts "build" and "dev". This is just a more intuitive names that describe their functions.
 
         "scripts":
         {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "webpack"
+        "dev": "webpack serve",
         },
 
-10. Remember to add node_modules to .gitignore before committing!
+8.  Run build to generate dist/main.js:
+
+    > $ npx run build
+
+9.  Run the webpack serve command for automatic re-builds, view at http://localhost:8080/
+
+    > $ npx run dev
 
 ## Asset Management
 
@@ -116,6 +117,7 @@ Abbreviated from [Webpack Docs: Getting Started](https://webpack.js.org/guides/g
           font-family: 'MyFont';
           background: url('./icon.png');
         }
+TBA: 3 image handling options
 
 ## Development Tools
 
@@ -137,26 +139,28 @@ Abbreviated from [Webpack Docs: Getting Started](https://webpack.js.org/guides/g
 
 1. Make a new branch for deployment:
 
-      > $ git branch gh-pages
+   > $ git branch gh-pages
 
 2. Check that all changes are commited:
 
-      > $ git status
+   > $ git status
 
 3. Merge changes from the main branch into the deployment branch:
 
-      > $ git checkout gh-pages && git merge main --no-edit
+   > $ git checkout gh-pages && git merge main --no-edit
 
-4. (TBA with Script!) Bundle  
+4. (TBA with Script!) Bundle
 
-      > $ npx webpack
+   > $ npx webpack
 
 5. Push deployment subtree branch, then return to main:
 
-      > git add dist -f && git commit -m "Deployment commit"  
-      > git subtree push --prefix dist origin gh-pages  
-      > git checkout main  
+   > git add dist -f && git commit -m "Deployment commit"  
+   > git subtree push --prefix dist origin gh-pages  
+   > git checkout main
 
 6. Repeat steps 2 through 5 for reployments.
 
-7. On GitHub settings, set source branch to gh-pages 
+7. On GitHub settings, set source branch to gh-pages
+
+## Useful Scripts
